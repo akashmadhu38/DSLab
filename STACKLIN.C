@@ -100,7 +100,7 @@ scanf("%d",&s);
 while(temp!=NULL)
 {
 if(temp->data==s)
-printf("%d data found at %d position:",temp->data,i);
+printf("%d found at %d position:",temp->data,i);
 temp=temp->next;
 i++;
 
