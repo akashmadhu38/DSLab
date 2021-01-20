@@ -9,6 +9,7 @@ void inspos();
 void delbeg();
 void delend();
 void delpos();
+void search();
 int count=0;
 struct node
 {
@@ -26,7 +27,7 @@ do
 {
 printf("\n\n1.Insert\n2.Display\n3.Insert at begining\n4.Insert at end");
 printf("\n5.Insert at position\n6.Delete at begening\n7.Delete at end");
-printf("\n8.delete at position\noption:");
+printf("\n8.delete at position\n9.Search\n10.Exit\noption:");
 scanf("%d",&c);
 switch(c)
 {
@@ -50,12 +51,14 @@ case 7:delend();
 break;
 case 8:delpos();
 break;
-case 9:exit(0);
+case 9:search();
+break;
+case 10:exit(0);
 break;
 default:printf("Invalid");
 break;
 }
-}while(c!=9);
+}while(c!=10);
 getch();
 }
 
@@ -208,5 +211,27 @@ temp->prev->next=temp->next;
 temp->next->prev=temp->next;
 printf("%d is deleted",temp->data);
 free(temp);
+}
+}
+void search()
+{
+int i=1,p;
+struct node *temp;
+temp=head;
+if(head==NULL)
+{
+printf("Empty");
+}
+else
+{
+printf("Enter the data to search:");
+scanf("%d",&p);
+while(temp!=NULL)
+{
+if(temp->data==p)
+printf("%d found at %dth position",temp->data,i);
+temp=temp->next;
+i++;
+}
 }
 }
