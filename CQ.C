@@ -1,8 +1,8 @@
 #include<stdlib.h>
 #include<stdio.h>
-int front=-1,rear=-1,CQ[5],max=5;
+int front=-1,rear=-1,CQ[5],max=3;
 void insert();
-int delete();
+int delet();
 void display();
 void main()
 {
@@ -20,7 +20,7 @@ switch(w)
 {
 case 1:insert();
 break;
-case 2:no=delete();
+case 2:no=delet();
 break;
 case 3:display();
 break;
@@ -28,7 +28,7 @@ case 4:exit(1);
 default:printf("\nInvalid Choice\n");
 }
 }
-while(w=4);
+while(w!=4);
 getch();
 }
 void insert()
@@ -49,22 +49,22 @@ else
 rear=rear+1;
 CQ[rear]=no;
 }
-int delete()
+int delet()
 {
 int e;
 if(front==-1)
 {
 printf("\nQueue is empty\n");
-
+return 0;
 }
 e=CQ[front];
-if(front==max-1)
-front=0;
-else if(front==rear)
+if(front==rear)
 {
 front=-1;
 rear=-1;
 }
+else if(front==max-1)
+front=0;
 else front=front+1;
 printf("\n%d is deleted \n",e);
 return e;
