@@ -199,6 +199,8 @@ if(p>count)
 printf("Invalid position");
 else if(p==count)
 delend();
+else if(p==1)
+delbeg();
 else
 {
 temp=head;
