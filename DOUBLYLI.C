@@ -198,9 +198,19 @@ scanf("%d",&p);
 if(p>count)
 printf("Invalid position");
 else if(p==count)
-delend();
+{
+  temp=tail;
+  tail=tail->prev;
+  printf("%d is deleted",temp->data);
+  free(temp);
+}  
 else if(p==1)
-delbeg();
+{
+  temp=head;
+  head=head->next;
+  printf("%d is deleted",temp->data);
+  free(temp);
+}
 else
 {
 temp=head;
