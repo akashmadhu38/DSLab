@@ -1,66 +1,105 @@
+#include<stdlib.h>
 #include<stdio.h>
-#include<conio.h>
-#define n 5
-int Q[n],front=-1,rear=-1;
-void enqueue();
-void dequeue();
+int front=-1,rear=-1,CQ[5],max=3;
+void insert();
+int delet();
 void display();
 void search();
 void main()
 {
-int c;
+int w,no;
 clrscr();
 do
 {
-printf("\n1.Enqueue\n2.Display\n3.Dequeue\n4.Search\nOption:");
-scanf("%d",&c);
-switch(c)
+printf("\n1. Insert");
+printf("\n2. Delete");
+printf("\n3. Display");
+printf("\n4. Search");
+printf("\n5.Exit");
+printf("\nEnter what you want :");
+scanf("%d",&w);
+switch(w)
 {
-case 1:enqueue();
+case 1:insert();
 break;
-case 2:display();
+case 2:no=delet();
 break;
-case 3:dequeue();
+case 3:display();
 break;
 case 4:search();
 break;
 case 5:exit(0);
 break;
-default:printf("Invalid");
+default:printf("\nInvalid Choice\n");
 break;
 }
-}while(c!=5);
+}
+while(w!=5);
 getch();
 }
-void enqueue()
+void insert()
 {
-int x;
-printf("Enter the data to insert:");
-scanf("%d",&x);
-if(rear==n)
+int no;
+if(front == (rear+1) % max)
 {
-printf("Queue overflow");
+printf("\nQueue is full\n");
+return;
 }
-else if(front==-1 && rear==-1)
-{
-front=rear=0;
-Q[rear]=x;
-}
+printf("\nEnter a number to Insert :");
+scanf("%d",&no);
+if(front==-1)
+front=front+1;
+if(rear==max-1)
+rear=0;
 else
-{
 rear=rear+1;
-Q[rear]=x;
+CQ[rear]=no;
 }
+int delet()
+{
+int e;
+if(front==-1)
+{
+printf("\nQueue is empty\n");
+return 0;
+}
+e=CQ[front];
+if(front==rear)
+{
+front=-1;
+rear=-1;
+}
+else if(front==max-1)
+front=0;
+else front=front+1;
+printf("\n%d is deleted \n",e);
+return e;
 }
 void display()
 {
 int i;
-if(rear==-1)
-printf("Queue is underflow");
+if(front==-1)
+{
+printf("\n Queue is empty\n");
+return;
+}
+i=front;
+if(front<=rear)
+{
+printf("\n\n");
+while(i<=rear)
+printf("%d ",CQ[i++]);
+printf("\n");
+}
 else
 {
-for(i=front;i<=rear;i++)
-printf("%d",Q[i]);
+printf("\n\n");
+while(i<=max-1)
+printf("%d ",CQ[i++]) ;
+i=0;
+while(i<=rear)
+printf("%d ",CQ[i++]);
+printf("\n");
 }
 }
 void search()
@@ -70,25 +109,13 @@ printf("Search:");
 scanf("%d",&s);
 for(i=front;i<=rear;i++)
 {
-if(Q[i]==s)
+if(CQ[i]==s)
 {
 p=1;
-printf("%d found at %d position",Q[i],i);
+printf("%d found at %d position",CQ[i],i);
 break;
 }
 }
 if(p==0)
 printf("%d not found");
-}
-void dequeue()
-{
-if(front==-1 && rear==-1)
-printf("Underflow");
-else if(front==rear)
-front=rear=-1;
-else
-{
-printf("\n%d deleted\n",Q[front]);
-front++;
-}
 }
