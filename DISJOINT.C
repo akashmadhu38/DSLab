@@ -14,6 +14,48 @@ struct node *tail;
 };
 struct node * list[20];
 int n;
+
+
+struct set * find(int x)
+{
+int i,f=0;
+for(i=0;i<n;i++)
+{
+if (list[i]->data==x)
+{
+f=1;
+break;
+}
+}
+if (f==1)
+return list[i]->top;
+else
+return NULL;
+}
+
+void unionn()
+{
+struct node *ptr;
+struct set *ptrx,*ptry;
+int x,y,i;
+printf("Enter the elements to join:");
+scanf("%d%d",&x,&y);
+ptrx=find(x);
+ptry=find(y);
+if (ptrx!=ptry)
+{
+ptrx->tail->next=ptry->head;
+ptrx->tail=ptry->tail;
+ptr=ptry->head;
+while(ptr!=NULL)
+{
+ptr->top=ptrx;
+ptr=ptr->next;
+}
+free(ptry);
+}
+}
+
 void display()
 {
 int i,j,count=0,f=0;
@@ -45,44 +87,8 @@ p[count++]=ptr;
 }
 }
 }
-struct set * find(int x)
-{
-int i,f=0;
-for(i=0;i<n;i++)
-{
-if (list[i]->data==x)
-{
-f=1;
-break;
-}
-}
-if (f==1)
-return list[i]->top;
-else
-return NULL;
-}
-void unionn()
-{
-struct node *ptr;
-struct set *ptrx,*ptry;
-int x,y,i;
-printf("Enter the elements to join:");
-scanf("%d%d",&x,&y);
-ptrx=find(x);
-ptry=find(y);
-if (ptrx!=ptry)
-{
-ptrx->tail->next=ptry->head;
-ptrx->tail=ptry->tail;
-ptr=ptry->head;
-while(ptr!=NULL)
-{
-ptr->top=ptrx;
-ptr=ptr->next;
-}
-free(ptry);
-}
-}
+
+
 void main()
 {
 int i,c,x;
