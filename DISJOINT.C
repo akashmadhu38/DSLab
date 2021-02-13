@@ -12,26 +12,26 @@ struct set
 struct node *head;
 struct node *tail;
 };
-struct node * nodelist[20];
+struct node * list[20];
 int n;
 void display()
 {
-int i,j,count=0,flag=0;
+int i,j,count=0,f=0;
 struct node *p1;
 struct set *ptr,*p[20];
 for(i=0;i<n;i++)
 {
-ptr=nodelist[i]->top;
-flag=0;
+ptr=list[i]->top;
+f=0;
 for(j=0;j<count;j++)
 {
 if (p[j]==ptr)
 {
-flag=1;
+f=1;
 break;
 }
 }
-if (flag==0)
+if (f==0)
 {
 printf("{");
 p1=ptr->head;
@@ -47,17 +47,17 @@ p[count++]=ptr;
 }
 struct set * find(int x)
 {
-int i,flag=0;
+int i,f=0;
 for(i=0;i<n;i++)
 {
-if (nodelist[i]->data==x)
+if (list[i]->data==x)
 {
-flag=1;
+f=1;
 break;
 }
 }
-if (flag==1)
-return nodelist[i]->top;
+if (f==1)
+return list[i]->top;
 else
 return NULL;
 }
@@ -97,7 +97,7 @@ for(i=0;i<n;i++)
 ne=(struct node *)malloc(sizeof(struct node));
 scanf("%d",&ne->data);
 ne->next=NULL;
-nodelist[i]=ne;
+list[i]=ne;
 p=(struct set*)malloc(sizeof(struct set));
 p->head=ne;
 p->tail=ne;
